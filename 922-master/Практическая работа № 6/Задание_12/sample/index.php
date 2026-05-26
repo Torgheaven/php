@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<title>Программирование на языке PHP</title>
+	<title>Задание 12</title>
 </head>
 <body>
 	<h1>Функции</h1>
