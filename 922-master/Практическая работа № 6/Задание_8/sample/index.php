@@ -10,39 +10,35 @@
 	<h2>Область видимости переменных</h2>
 
 	<?php
-		// включение файла 
-		require "personnel.php";
+require "personnel.php";
 
-		// функция, выполняющая изменения значения массива
+function fnChangingTerm(&$person, $term, $val) {
+    $person[$term] = $val;
+}
 
-		// изменяемы массив определяется значением $num
-		// ключ массива для изменения определяется значением $term
-		// новое значение ключа определяется значением $val
-		function fnChangingTerm($person, $term, $val) {
-		
-			// функция состоит из одной инструкции
-			$person[$term] = $val;
-		}
+if (
+    isset($_GET['num']) &&
+    isset($_GET['term']) &&
+    isset($_GET['val']) &&
+    isset($personnel[$_GET['num']])
+) {
+    $num = $_GET['num'];
+    $term = $_GET['term'];
+    $val = $_GET['val'];
 
-		// все параметры функции берутся из строки запроса
+    echo "<pre>До изменения:\n";
+    var_dump($personnel[$num]);
+    echo "</pre>";
 
-		// строка запроса может выглядеть следующим образом:
-		// ?num=1&term=surname&val=Иванов	
-		// или так
-		// ?num=2&term=post&val=Мастер	
-		
-		$num = $_GET["num"];
-		$term = $_GET["term"];
-		$val = $_GET["val"];
-		
-		// вызов функции изменяющей значение массива
-		// номер изменяемого вложенного массива определяется значением $id
-		fnChangingTerm($personnel[$num], $term, $val);	
+    fnChangingTerm($personnel[$num], $term, $val);
 
-		echo "<pre>";
-		var_dump($personnel[$num]);
-		echo "</pre>";
-	?>
+    echo "<pre>После изменения:\n";
+    var_dump($personnel[$num]);
+    echo "</pre>";
+} else {
+    echo "<b>Ошибка:</b> Проверьте, что параметры num, term, val заданы корректно.";
+}
+?>
 	
 
 </body>

@@ -14,39 +14,37 @@
 	<?php
 		// включение файла с массивом $personnel
 		require "personnel.php";
+
 		// массив для сбора статистики
 		$statistic = array();
-		
-		// описание функции сбора статистических данных
-		function fnСollectingStatistic ($array){
+
+		// исправленная функция сбора статистики
+		function fnCollectingStatistic($array) {
 			global $statistic;
-			static $i = 0; // статическая переменная
-			
+			static $i = 0;
 			$statistic[$i]["user"] = $array["surname"] . " " . $array["name"] . " " . $array["patronymic"];
 			$statistic[$i]["site"] = $array["site"];
 			$statistic[$i]["email"] = $array["email"];
+			$i++;
 		}
-		
-		// описание функции вывода таблицы персонала
-		function fnOutPersonnel ($personnel) {
+
+		// функция вывода таблицы персонала
+		function fnOutPersonnel($personnel) {
 			$tr = "";
-			// перебираем массив 
 			foreach ($personnel as $key => $person) {
-				
-				// вызываем функцию сбора статистики
-				if ($person["site"] == "" || $person["email"] == "") fnСollectingStatistic ($person);
-				
+				// сбор статистики для преподавателей без сайта или email
+				if ($person["site"] == "" || $person["email"] == "") {
+					fnCollectingStatistic($person);
+				}
 				$tr .= "
 					<tr>
 						<td>{$person['id_personnel']}</td>
 						<td>{$person['surname']} {$person['name']} {$person['patronymic']}</td>
 						<td>{$person['post']}</td>
 						<td>{$person['category']}</td>
-					</tr>	
+					</tr>
 				";
-			};
-			
-			// возвращаем результат-таблицу
+			}
 			return "
 				<table border=1 cellpadding=5>
 				<tr>
@@ -58,14 +56,33 @@
 				{$tr}
 				</table>
 			";		
-		}			
-		
-		// вызов функции вывода таблицы персонала
-		echo fnOutPersonnel ($personnel);	
+		}
 
-		// вывод дампа с массивом статистики
-		echo "<pre>";
-		var_dump($statistic);
+		// вывод таблицы персонала
+		echo fnOutPersonnel($personnel);
+
+		// функция вывода статистики в виде таблицы
+		function fnDisplayStatistic($statistic) {
+			$html = "<h2>Статистика преподавателей без сайта или почты</h2>";
+			$html .= "<table border='1' cellpadding='5'>";
+			$html .= "<tr>
+						<th>Пользователь</th>
+						<th>Сайт</th>
+						<th>Email</th>
+					  </tr>";
+			foreach ($statistic as $entry) {
+				$html .= "<tr>
+							<td>{$entry['user']}</td>
+							<td>{$entry['site']}</td>
+							<td>{$entry['email']}</td>
+						  </tr>";
+			}
+			$html .= "</table>";
+			return $html;
+		}
+
+		// вывод статистики
+		echo fnDisplayStatistic($statistic);
 	?>
 	
 
