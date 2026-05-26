@@ -8,27 +8,37 @@
 	<h1>Функции</h1>
 	<h2>Анонимные функции</h2>
 	
-	<?php		
-		// включаем массив
-		require "albums.php";
-		
-		// определяем callback-функцию
-		$callback = function ($item) {
-			// если в строке ключе статуса есть вхождение строки Серебряный
-			// отбираем этот массив
-			if (strpos($item["status"], "Серебряный") != ""){
-				return $item;
-			}
-		};
+	<?php
+require "albums.php";
 
-		// вызываем array_map
-		$res = array_map($callback, $albums);
-		
-		// выводим результат
-		echo "<pre>";
-		var_dump($res);
-		echo "</pre>";
-	?>
+// глобальный массив для результатов
+$result_albums = [];
+
+array_map(function($item) use (&$result_albums) {
+    if (strpos($item["status"], "Серебряный") !== false) {
+        $result_albums[] = $item;
+    }
+}, $albums);
+
+echo "<pre>";
+var_dump($result_albums);
+echo "</pre>";
+
+
+
+$result_albums1 = [];
+
+array_map(function($item) {
+    global $result_albums1;
+    if (strpos($item["status"], "Серебряный") !== false) {
+        $result_albums1[] = $item;
+    }
+}, $albums);
+
+echo "<pre>";
+var_dump($result_albums1);
+echo "</pre>";
+?>
 	
 
 </body>

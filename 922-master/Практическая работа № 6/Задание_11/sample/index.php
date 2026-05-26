@@ -10,43 +10,39 @@
 	<hr>
 	<h2>Список преподавателей</h2>
 	
-	<?php
-		// включение файла с массивом $personnel
-		require "personnel.php";
-		
-		// описание функции вывода таблицы персонала
-		function fnOutPersonnel ($personnel) {
-			$tr = "";
-			// перебираем массив 
-			foreach ($personnel as $key => $person) {
-				
-				$tr .= "
-					<tr>
-						<td>{$person['id_personnel']}</td>
-						<td>{$person['surname']} {$person['name']} {$person['patronymic']}</td>
-						<td>{$person['post']}</td>
-						<td>{$person['category']}</td>
-					</tr>	
-				";
-			};
-			
-			// возвращаем результат-таблицу
-			return "
-				<table border=1 cellpadding=5>
-				<tr>
-					<th>№</th>
-					<th>Фамилия Имя Отчество</th>
-					<th>Должность</th>
-					<th>Категория</th>
-				</tr>
-				{$tr}
-				</table>
-			";		
-		}			
-		
-		// вызов функции вывода таблицы персонала
-		echo fnOutPersonnel ($personnel);	
-	?>
+<?php
+// включение файла с массивом $personnel
+require "personnel.php";
+
+// создаем замыкание, наследующее массив $personnel
+$fnOutPersonnel = function() use ($personnel) {
+    $tr = "";
+    foreach ($personnel as $person) {
+        $tr .= "
+            <tr>
+                <td>{$person['id_personnel']}</td>
+                <td>{$person['surname']} {$person['name']} {$person['patronymic']}</td>
+                <td>{$person['post']}</td>
+                <td>{$person['category']}</td>
+            </tr>	
+        ";
+    }
+    return "
+        <table border=1 cellpadding=5>
+        <tr>
+            <th>№</th>
+            <th>Фамилия Имя Отчество</th>
+            <th>Должность</th>
+            <th>Категория</th>
+        </tr>
+        {$tr}
+        </table>
+    ";
+};
+
+// вызов замыкания
+echo $fnOutPersonnel();
+?>
 	
 
 </body>

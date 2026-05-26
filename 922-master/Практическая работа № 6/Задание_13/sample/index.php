@@ -9,31 +9,36 @@
 	<h2>Анонимные функции</h2>
 	
 	<?php
-		require "albums.php";
+require "albums.php";
 
-		// перебираем массив
-		foreach ($albums as $key => $item) {
-			// выводим данные массива
-			printf("
-				Номер - %s<br />
-				ID альбома: %d<br />
-				Название: %s<br />
-				Дата выпуска: %s<br />
-				Лейбл: %s<br />
-				Формат: %s<br />
-				Статус: %s<p>
-				<hr />
-			",
-				($key < 9) ? "000" . ++$key : "00". ++$key, // отформатируем вывод номера 
-				$item['id'],
-				$item['album_name'],
-				$item['date'],
-				$item['label'],
-				$item['format'],
-				$item['status']			
-			);	
-		};
-	?>
+// Используем array_map для обработки массива
+$clean_albums = array_map(function($album) {
+    // создаем новый массив, где все значения очищены
+    return array_map('strip_tags', $album);
+}, $albums);
+
+// выводим очищенные данные
+array_map(function($item, $key) {
+    printf("
+        Номер - %s<br />
+        ID альбома: %d<br />
+        Название: %s<br />
+        Дата выпуска: %s<br />
+        Лейбл: %s<br />
+        Формат: %s<br />
+        Статус: %s<p>
+        <hr />
+    ",
+        ($key < 9) ? "000" . ++$key : "00". ++$key,
+        $item['id'],
+        $item['album_name'],
+        $item['date'],
+        $item['label'],
+        $item['format'],
+        $item['status']
+    );
+}, $clean_albums, array_keys($clean_albums));
+?>
 	
 
 </body>
