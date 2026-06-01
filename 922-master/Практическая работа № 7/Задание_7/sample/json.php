@@ -10,9 +10,9 @@
 	*/
 	
    $json = '{
-    	\'name\' : "Harry Potter and the Goblet of Fire";
-    	\'author\' : "J. K. Rowling";
-    	\'year\' : "2000";
-    	\'genre\' : "Fantasy Fiction";
-    	\'bestseller\' : "true"
-    }';
+  "name": "Harry Potter and the Goblet of Fire",
+  "author": "J. K. Rowling",
+  "year": "2000",
+  "genre": "Fantasy Fiction",
+  "bestseller": true
+}';
