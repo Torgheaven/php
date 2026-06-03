@@ -10,10 +10,11 @@ $path = $_POST['path'] ?? '';
 $content = $_POST['content'] ?? '';
 $note = $_POST['note'] ?? ''; 
 $json_auto = json_encode($_POST);
+$lol = json_decode($json_auto);
 // Выводим полученные данные
 echo "<h1>Переданные данные</h1>";
 echo "<strong>JSON строка</strong></br>";
 echo $json_auto,"</br>";
 echo "<strong>PHP массив </strong> </br>";
-var_dump("<pre>", $_POST, "</pre>"); 
+var_dump("<pre>", $lol, "</pre>"); 
 ?>
