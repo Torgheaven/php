@@ -67,4 +67,7 @@ if (isset($_POST['loader'])) {
 			echo "<h3>Заполните, пожалуйста, форму</h3>";
 		
 		};
+		$a = "upload/";
+		$b = $a . basename($_FILES["image"]["name"]);
+		echo '<img src="' . $b. '" alt="Загруженное изображение" style="max-width: 500px; height: auto;">'
 	?>
