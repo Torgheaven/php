@@ -88,8 +88,15 @@
 <?php
 
 $connect= new mysqli("localhost", "root", "12345678", "users");
-$sql= INSERT INTO`users`(`id_user`, `name`, `login`, `email`, `password`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]'); 
-$result= ;
+$sql= sprintf("INSERT INTO`users`(`id_user`, `name`, `login`, `email`, `password`)
+ VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]'",
+
+$_POST['name'],
+$_POST['login'],
+$_POST['email'],
+$_POST['password']
+);  
+$result=$conn->query($sql);
 ?>
 </body>
 </html>
