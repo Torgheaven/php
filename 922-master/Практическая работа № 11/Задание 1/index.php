@@ -85,5 +85,11 @@
 <footer>
 </footer>
 
+<?php
+
+$connect= new mysqli("localhost", "root", "12345678", "users");
+$sql= INSERT INTO`users`(`id_user`, `name`, `login`, `email`, `password`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]'); 
+$result= ;
+?>
 </body>
 </html>
