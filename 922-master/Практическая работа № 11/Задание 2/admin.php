@@ -1,6 +1,6 @@
 <?php
 
-$conn = new mysqli('localhost','root','12345678','pr11n1base');
+$conn = new mysqli('localhost','root','12345678','users');
 $sql = $conn->prepare("SELECT * FROM `users`");
 $sql->execute();
 
