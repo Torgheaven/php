@@ -53,13 +53,13 @@
     <form action="" method="post" class="w-50 mx-auto">
          <div class="mb-3 min-height: 80vh container py-3" >
     <label for="exampleInputEmail1" class="form-label">Имя</label>
-    <input type="email" class="form-control form-control rounded-pill shadow-sm px-3" id="exampleInputEmail1" aria-describedby="name" name="name">
+    <input type="text" class="form-control form-control rounded-pill shadow-sm px-3" id="exampleInputEmail1" aria-describedby="name" name="name">
     <div id="emailHelp" class="form-text">Input your name.</div>
   </div>
 
  <div class="mb-3 min-height: 80vh container py-3">
     <label for="exampleInputEmail1" class="form-label">Логин</label>
-    <input type="email" class="form-control form-control rounded-pill shadow-sm px-3" id="exampleInputEmail1" aria-describedby="login" name="login">
+    <input type="text" class="form-control form-control rounded-pill shadow-sm px-3" id="exampleInputEmail1" aria-describedby="login" name="login">
     <div id="emailHelp" class="form-text">Whats your login?</div>
   </div>
 
@@ -88,9 +88,7 @@
 <?php
 
 $connect= new mysqli("localhost", "root", "12345678", "users");
-$sql= sprintf("INSERT INTO`users`(`id_user`, `name`, `login`, `email`, `password`)
- VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]'",
-
+$sql= sprintf("INSERT INTO `users`(`name`, `login`, `email`, `password`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]'))",
 $_POST['id_user'],
 $_POST['name'],
 $_POST['login'],
